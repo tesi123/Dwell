@@ -1,0 +1,60 @@
+{
+    "search_configuration": {
+      "verticals": {
+
+        "rentals": {
+          "name": "Rental Listings Search",
+          "description": "Search rental properties by various criteria such as zip code, rating, address, city, and landlord.",
+          "search_fields": [
+            "name",
+            "zipCode",
+            "rating",
+            "address",
+            "address.city",
+            "address.state",
+            "landlordUid" 
+          ],
+          "filters": {
+            "rating": [1, 2, 3, 4, 5],
+            "zipCode": "string",
+            "address": {
+              "city": "string",
+              "state": "string",
+              "street": "string"
+            },
+            "landlordUid": "string"
+          },
+          "sort_by": ["rating", "zipCode", "name"],
+          "default_sort": "rating",
+          "pagination": {
+            "resultsPerPage": 5,
+            "currentPage": 1
+          },
+          "query_routing": {
+            "rules": [
+              {
+                "query": "rating",
+                "filter": "rating"
+              },
+              {
+                "query": "zipcode",
+                "filter": "zipCode"
+              },
+              {
+                "query": "address",
+                "filter": "address"
+              },
+              {
+                "query": "landlord",
+                "filter": "landlordUid"
+              },
+              {
+                "query": "city",
+                "filter": "address.city"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
